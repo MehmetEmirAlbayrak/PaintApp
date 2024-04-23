@@ -7,6 +7,7 @@ public class Canvas : MonoBehaviour
 
     [SerializeField] private GameObject canvas;
     private Texture2D texture;
+   
   
 
     // Start is called before the first frame update
@@ -30,5 +31,19 @@ public class Canvas : MonoBehaviour
     public  Texture2D getTexture()
     {
         return texture;
+    }
+
+    public Vector2Int getMouseAxis()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = Camera.main.nearClipPlane + 9.70f;
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+
+        float mouseX = texture.width * (worldPos.x - (texture.width / 200.0f)) / (texture.width / 100.0f);
+        float mouseY = texture.height * (worldPos.y - (texture.height / 200.0f)) / (texture.height / 100.0f);
+        return new Vector2Int((int)mouseX,(int) mouseY);
+
+
+
     }
 }
