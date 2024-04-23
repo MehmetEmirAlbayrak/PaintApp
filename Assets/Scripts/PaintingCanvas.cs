@@ -2,13 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Canvas : MonoBehaviour
+public class PaintingCanvas : MonoBehaviour
 {
 
     [SerializeField] private GameObject canvas;
     private Texture2D texture;
-   
-  
+    private Painting paint;
+    private Bucket bucket;
+    private Eraser erase;
+    private Stamp stamp;
+    public static bool activePaint=true;
+    public static bool activeBucket=false;
+    public static bool activeErase=false;
+    public static bool activeStamp=false;
+    public static Color selectedColor=Color.black;
+    public static Texture2D selectedStamp;
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +35,31 @@ public class Canvas : MonoBehaviour
         }
         texture.Apply();
         mapRenderer.sprite= Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+        paint = new Painting();
+        bucket = new Bucket();
+        erase = new Eraser();
+        stamp = new Stamp();
+    }
+    private void Update()
+    {
+        if (activePaint)
+        {
+            paint.Painter(texture, getMouseAxis(),selectedColor);
+        }
+        else if (activeBucket)
+        {
+            bucket.Fill(texture,selectedColor);
+
+        }
+        else if (activeErase)
+        {
+            erase.Erase(texture,getMouseAxis());
+
+        }
+        else if (activeStamp)
+        {
+            stamp.PaintStamp(texture,getMouseAxis(),selectedStamp);
+        }
     }
 
     public  Texture2D getTexture()

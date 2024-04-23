@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bucket
 {
-    public void Fill(Texture2D fillTexture)
+    public void Fill(Texture2D fillTexture,Color selectedColor)
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -13,7 +13,7 @@ public class Bucket
             {
                 for(int j = 0; j < fillTexture.width; j++)
                 {
-                    fillTexture.SetPixel((int)j, (int)i, Color.black);
+                    fillTexture.SetPixel(j, i, selectedColor);
                 }
             }
             fillTexture.Apply();
