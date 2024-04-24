@@ -7,6 +7,8 @@ public class PaintingCanvas : MonoBehaviour
 {
 
     [SerializeField] private GameObject canvas;
+    [SerializeField] private GameObject particle;
+    [SerializeField]private Material particleMaterial;
     private Texture2D texture;
     private Painting paint;
     private Bucket bucket;
@@ -18,6 +20,7 @@ public class PaintingCanvas : MonoBehaviour
     public static bool setDraw = true;
     public static Color selectedColor=Color.black;
     public static Texture2D selectedStamp;
+    
 
 
     // Start is called before the first frame update
@@ -50,21 +53,27 @@ public class PaintingCanvas : MonoBehaviour
     {
         if (activePaint)
         {
-            paint.Painter(texture, GetMouseAxis(),selectedColor,setDraw);
+            particleMaterial.color = selectedColor;
+            paint.Painter(texture, GetMouseAxis(),selectedColor,setDraw,particle);
+         
         }
         else if (activeBucket)
         {
             bucket.Fill(texture,selectedColor,GetMouseAxis(),setDraw);
+            
 
         }
         else if (activeErase)
         {
-            paint.Painter(texture,GetMouseAxis(),Color.white,setDraw);
+            particleMaterial.color = Color.white;
+            paint.Painter(texture,GetMouseAxis(),Color.white,setDraw,particle);
+            
 
         }
         else if (activeStamp)
         {
             stamp.PaintStamp(texture,GetMouseAxis(),selectedStamp,setDraw);
+            
         }
     }
 
@@ -101,5 +110,7 @@ public class PaintingCanvas : MonoBehaviour
         if (bytes != null)
             texture.LoadImage(bytes);
     }
+
     
+
 }
