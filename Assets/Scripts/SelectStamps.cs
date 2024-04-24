@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class SelectStamps : MonoBehaviour
 {
-
-    public void SelectStamp(Button select)
+    [SerializeField] private GameObject Stamps;
+    public void SelectStamp(Texture2D select)
     {
-        PaintingCanvas.selectedStamp = select.image.sprite.texture;
+        PaintingCanvas.selectedStamp = select;
+        PaintingCanvas.setDraw = true;
+        Stamps.SetActive(false);
         
     }
 }

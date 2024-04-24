@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Bucket
 {
-    public void Fill(Texture2D fillTexture,Color selectedColor)
+    public void Fill(Texture2D fillTexture, Color selectedColor,Vector2Int mousepos,bool isDrawable)
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && mousepos.y<428 && isDrawable )
         {
 
-            for(int i = 0; i < fillTexture.height; i++)
+            for (int i = 0; i < fillTexture.height; i++)
             {
-                for(int j = 0; j < fillTexture.width; j++)
+                for (int j = 0; j < fillTexture.width; j++)
                 {
                     fillTexture.SetPixel(j, i, selectedColor);
                 }

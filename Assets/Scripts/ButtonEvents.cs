@@ -20,8 +20,8 @@ public class ButtonEvents : MonoBehaviour
         rSlider.gameObject.SetActive(false);
         gSlider.gameObject.SetActive(false);
         bSlider.gameObject.SetActive(false);
-        showColor.gameObject.SetActive(false);
         Stamps.SetActive(false);
+        PaintingCanvas.setDraw = true;
 
     }
     public void OpenBucket()
@@ -33,8 +33,8 @@ public class ButtonEvents : MonoBehaviour
         rSlider.gameObject.SetActive(false);
         gSlider.gameObject.SetActive(false);
         bSlider.gameObject.SetActive(false);
-        showColor.gameObject.SetActive(false);
         Stamps.SetActive(false);
+        PaintingCanvas.setDraw = true;
 
     }
     public void OpenErase()
@@ -44,6 +44,7 @@ public class ButtonEvents : MonoBehaviour
         PaintingCanvas.activeErase = true;
         PaintingCanvas.activeStamp = false;
         Stamps.SetActive(false);
+        PaintingCanvas.setDraw = true;
 
     }
     public void OpenStamp()
@@ -56,7 +57,7 @@ public class ButtonEvents : MonoBehaviour
         rSlider.gameObject.SetActive(false);
         gSlider.gameObject.SetActive(false);
         bSlider.gameObject.SetActive(false);
-        showColor.gameObject.SetActive(false);
+        PaintingCanvas.setDraw = false;
     }
 
     public void SelectColor()
@@ -64,8 +65,8 @@ public class ButtonEvents : MonoBehaviour
         rSlider.gameObject.SetActive(true);
         gSlider.gameObject.SetActive(true);
         bSlider.gameObject.SetActive(true);
-        showColor.gameObject.SetActive(true);
         Stamps.SetActive(false);
+        PaintingCanvas.setDraw = false;
         StartCoroutine(ChangeColor());
     }
 

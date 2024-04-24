@@ -5,22 +5,26 @@ using UnityEngine;
 public class Stamp
 {
 
-    public void PaintStamp(Texture2D texture,Vector2Int mousepos,Texture2D stampTexture)
+    public void PaintStamp(Texture2D texture, Vector2Int mousepos, Texture2D stampTexture,bool isDrawable)
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && stampTexture != null && mousepos.y<428 && isDrawable)
         {
 
             int width = stampTexture.width;
             int height = stampTexture.height;
-            for (int i =0 ; i < width; i++)
+            
+
+            for (int i = 0; i < width; i++)
             {
-                for (int j = 0; j <height; j++)
+                for (int j = 0; j < height; j++)
                 {
                     if (stampTexture.GetPixel(i, j).a != 0)
-                        texture.SetPixel(mousepos.x+(i-width/2),mousepos.y+(j-height/2), stampTexture.GetPixel(i,j));
+                        texture.SetPixel(mousepos.x + (i - width / 2), mousepos.y + (j - height / 2), stampTexture.GetPixel(i, j));
                 }
             }
+            Debug.Log(mousepos.y);
             texture.Apply();
+            
         }
     }
 }
