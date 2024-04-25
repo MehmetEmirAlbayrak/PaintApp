@@ -8,10 +8,7 @@ public class SoundCreator : MonoBehaviour
     [SerializeField] private GameObject eraseSound;
     [SerializeField] private GameObject bucketSound;
     [SerializeField] private GameObject stampSound;
-    private GameObject paintTemp;
-    private GameObject eraseTemp;
-    private GameObject bucketTemp;
-    private GameObject stampTemp;
+    private GameObject audioTemp;
     private PaintingCanvas mouseY;
     // Start is called before the first frame update
     void Start()
@@ -26,21 +23,21 @@ public class SoundCreator : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             
-            if (PaintingCanvas.activePaint && PaintingCanvas.setDraw && mouseY.GetMouseAxis().y < 428)
+            if (PaintingCanvas.activePaint && PaintingCanvas.setDraw && mouseY.GetMouseCoordinates().y < PositionHelpers.maxPixelY)
             {
-                paintTemp = Instantiate(paintSound);
+                audioTemp = Instantiate(paintSound);
             }
-            else if (PaintingCanvas.activeErase && PaintingCanvas.setDraw && mouseY.GetMouseAxis().y < 428)
+            else if (PaintingCanvas.activeErase && PaintingCanvas.setDraw && mouseY.GetMouseCoordinates().y < PositionHelpers.maxPixelY)
             {
-                eraseTemp = Instantiate(eraseSound);
+                audioTemp = Instantiate(eraseSound);
             }
-            else if (PaintingCanvas.activeBucket && PaintingCanvas.setDraw && mouseY.GetMouseAxis().y < 428)
+            else if (PaintingCanvas.activeBucket && PaintingCanvas.setDraw && mouseY.GetMouseCoordinates().y < PositionHelpers.maxPixelY)
             {
-                bucketTemp = Instantiate(bucketSound);
+                audioTemp = Instantiate(bucketSound);
             }
-            else if (PaintingCanvas.activeStamp && PaintingCanvas.setDraw && mouseY.GetMouseAxis().y < 428)
+            else if (PaintingCanvas.activeStamp && PaintingCanvas.setDraw && mouseY.GetMouseCoordinates().y < PositionHelpers.maxPixelY)
             {
-                stampTemp = Instantiate(stampSound);
+                audioTemp = Instantiate(stampSound);
             }
         }
 
@@ -48,19 +45,11 @@ public class SoundCreator : MonoBehaviour
         {
             if (PaintingCanvas.activePaint)
             {
-                Destroy(paintTemp);
+                Destroy(audioTemp);
             }
             else if (PaintingCanvas.activeErase)
             {
-                Destroy(eraseTemp);
-            }
-            else if (PaintingCanvas.activeBucket)
-            {
-                Invoke("DestroyBucket",3.0f);
-            }
-            else if (PaintingCanvas.activeStamp)
-            {
-                Invoke("DestroyStamp", 2.0f);
+                Destroy(audioTemp);
             }
 
 
@@ -69,12 +58,5 @@ public class SoundCreator : MonoBehaviour
        
        
     }
-    private void DestroyBucket()
-    {
-        Destroy(bucketTemp);
-    }
-    private void DestroyStamp()
-    {
-        Destroy(stampTemp);
-    }
+    
 }

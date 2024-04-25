@@ -6,7 +6,7 @@ public class Bucket
 {
     public void Fill(Texture2D fillTexture, Color selectedColor,Vector2Int mousepos,bool isDrawable)
     {
-        if (Input.GetMouseButtonDown(0) && mousepos.y<428 && isDrawable )
+        if (Input.GetMouseButtonDown(0) && mousepos.y< PositionHelpers.maxPixelY && isDrawable )
         {
 
             for (int i = 0; i < fillTexture.height; i++)

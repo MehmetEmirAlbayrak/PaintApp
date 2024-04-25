@@ -7,7 +7,7 @@ public class Stamp
 
     public void PaintStamp(Texture2D texture, Vector2Int mousepos, Texture2D stampTexture,bool isDrawable)
     {
-        if (Input.GetMouseButtonDown(0) && stampTexture != null && mousepos.y<428 && isDrawable)
+        if (Input.GetMouseButtonDown(0) && stampTexture != null && mousepos.y< PositionHelpers.maxPixelY && isDrawable)
         {
 
             int width = stampTexture.width;
@@ -22,7 +22,6 @@ public class Stamp
                         texture.SetPixel(mousepos.x + (i - width / 2), mousepos.y + (j - height / 2), stampTexture.GetPixel(i, j));
                 }
             }
-            Debug.Log(mousepos.y);
             texture.Apply();
             
         }
