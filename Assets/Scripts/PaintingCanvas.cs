@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
 
 public class PaintingCanvas : MonoBehaviour
 {
     [SerializeField] private GameObject canvas;
     [SerializeField] private GameObject particle;
     [SerializeField] private Material particleMaterial;
+    [SerializeField] private Button[] brushButtons;
     private Texture2D texture;
     private Painting paint;
     private Bucket bucket;
@@ -19,6 +21,7 @@ public class PaintingCanvas : MonoBehaviour
     public static bool setDraw = true;
     public static Color selectedColor = Color.black;
     public static Texture2D selectedStamp;
+
 
 
     // Start is called before the first frame update
@@ -37,7 +40,7 @@ public class PaintingCanvas : MonoBehaviour
         }
         texture.Apply();
         mapRenderer.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-        paint = new Painting();
+        paint = gameObject.AddComponent<Painting>();
         bucket = new Bucket();
         stamp = new Stamp();
 
@@ -87,19 +90,38 @@ public class PaintingCanvas : MonoBehaviour
 
     public void SaveImage()
     {
-        File.WriteAllBytes(Application.dataPath + "/canvas.png", texture.EncodeToPNG());
+        File.WriteAllBytes(Application.persistentDataPath + "/canvas.png", texture.EncodeToPNG());
     }
 
-    private void LoadImage()
+    public void LoadImage()
     {
-        byte[] bytes = File.ReadAllBytes(Application.dataPath + "/canvas.png");
-        if (bytes != null)
-            texture.LoadImage(bytes);
+        try
+        {
+
+            byte[] bytes = File.ReadAllBytes(Application.persistentDataPath + "/canvas.png");
+            if (bytes != null)
+                texture.LoadImage(bytes);
+        }
+
+        catch (FileNotFoundException e)
+        {
+            print(e.Message);
+        }
     }
 
     public void SetBrushShape(int shape)
     {
         paint.SetShape(shape == 0 ? Painting.BrushShape.Circle : Painting.BrushShape.Square);
+        if (shape == 0)
+        {
+            brushButtons[0].GetComponent<Image>().color = Color.green;
+            brushButtons[1].GetComponent<Image>().color = Color.white;
+        }
+        else
+        {
+            brushButtons[1].GetComponent<Image>().color = Color.green;
+            brushButtons[0].GetComponent<Image>().color = Color.white;
+        }
     }
 
     public void SetBrushRadius(System.Single radius)

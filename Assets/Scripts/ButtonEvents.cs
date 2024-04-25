@@ -10,6 +10,9 @@ public class ButtonEvents : MonoBehaviour
     [SerializeField] private Slider bSlider;
     [SerializeField] private Image showColor;
     [SerializeField] private GameObject Stamps;
+    [SerializeField] private GameObject brushObject;
+    [SerializeField] private Button[] buttons;
+    private bool painting=false;
 
     public void OpenPaint()
     {
@@ -17,11 +20,19 @@ public class ButtonEvents : MonoBehaviour
         PaintingCanvas.activeBucket = false;
         PaintingCanvas.activeErase = false;
         PaintingCanvas.activeStamp = false;
+        brushObject.SetActive(true);
         rSlider.gameObject.SetActive(false);
         gSlider.gameObject.SetActive(false);
         bSlider.gameObject.SetActive(false);
         Stamps.SetActive(false);
         PaintingCanvas.setDraw = true;
+        buttons[0].GetComponent<Image>().color = Color.green;
+        buttons[1].GetComponent<Image>().color = Color.white;
+        buttons[2].GetComponent<Image>().color = Color.white;
+        buttons[3].GetComponent<Image>().color = Color.white;
+
+
+
 
     }
     public void OpenBucket()
@@ -34,7 +45,13 @@ public class ButtonEvents : MonoBehaviour
         gSlider.gameObject.SetActive(false);
         bSlider.gameObject.SetActive(false);
         Stamps.SetActive(false);
+        brushObject.SetActive(false);
         PaintingCanvas.setDraw = true;
+        
+        buttons[0].GetComponent<Image>().color = Color.white;
+        buttons[1].GetComponent<Image>().color = Color.green;
+        buttons[2].GetComponent<Image>().color = Color.white;
+        buttons[3].GetComponent<Image>().color = Color.white;
 
     }
     public void OpenErase()
@@ -43,8 +60,13 @@ public class ButtonEvents : MonoBehaviour
         PaintingCanvas.activeBucket = false;
         PaintingCanvas.activeErase = true;
         PaintingCanvas.activeStamp = false;
+        brushObject.SetActive(true);
         Stamps.SetActive(false);
         PaintingCanvas.setDraw = true;
+        buttons[0].GetComponent<Image>().color = Color.white;
+        buttons[1].GetComponent<Image>().color = Color.white;
+        buttons[2].GetComponent<Image>().color = Color.green;
+        buttons[3].GetComponent<Image>().color = Color.white;
 
     }
     public void OpenStamp()
@@ -54,19 +76,26 @@ public class ButtonEvents : MonoBehaviour
         PaintingCanvas.activeErase = false;
         PaintingCanvas.activeStamp = true;
         Stamps.SetActive(true);
+        brushObject.SetActive(false);
         rSlider.gameObject.SetActive(false);
         gSlider.gameObject.SetActive(false);
         bSlider.gameObject.SetActive(false);
         PaintingCanvas.setDraw = false;
+        buttons[0].GetComponent<Image>().color = Color.white;
+        buttons[1].GetComponent<Image>().color = Color.white;
+        buttons[2].GetComponent<Image>().color = Color.white;
+        buttons[3].GetComponent<Image>().color = Color.green;
     }
 
     public void SelectColor()
     {
-        rSlider.gameObject.SetActive(true);
-        gSlider.gameObject.SetActive(true);
-        bSlider.gameObject.SetActive(true);
+        painting = !painting;
+        rSlider.gameObject.SetActive(painting);
+        gSlider.gameObject.SetActive(painting);
+        bSlider.gameObject.SetActive(painting);
+        brushObject.SetActive(false);
         Stamps.SetActive(false);
-        PaintingCanvas.setDraw = false;
+        PaintingCanvas.setDraw =!PaintingCanvas.setDraw;
         StartCoroutine(ChangeColor());
     }
 
