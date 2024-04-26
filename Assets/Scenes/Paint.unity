@@ -4102,6 +4102,9 @@ MonoBehaviour:
   canvas: {fileID: 1553855814}
   particle: {fileID: 8389067857454288072, guid: 524266bf211da43afb074a49e550be1f, type: 3}
   particleMaterial: {fileID: 2100000, guid: 257f1a17991284da0bec142961ef42a5, type: 2}
+  brushButtons:
+  - {fileID: 237392499}
+  - {fileID: 114659838}
 --- !u!4 &1551967085
 Transform:
   m_ObjectHideFlags: 0
@@ -4134,6 +4137,12 @@ MonoBehaviour:
   bSlider: {fileID: 674854058}
   showColor: {fileID: 877450867}
   Stamps: {fileID: 188141714}
+  brushObject: {fileID: 1321828882}
+  buttons:
+  - {fileID: 159398638}
+  - {fileID: 1433974991}
+  - {fileID: 319206149}
+  - {fileID: 843527086}
 --- !u!114 &1551967087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4473,7 +4482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1703928058
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4513,7 +4522,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1f433d2f9cc054992a32dffb68c28d75, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1a88eb8dc9b7e4ccf8fcd8caeb478d90, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4802,7 +4811,7 @@ GameObject:
   - component: {fileID: 1968070239}
   - component: {fileID: 1968070238}
   m_Layer: 5
-  m_Name: SaveButton (1)
+  m_Name: LoadButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
